@@ -1,0 +1,14 @@
+development.driver=com.mysql.jdbc.Driver
+development.username=<user>
+development.password=<password>
+development.url=jdbc:mysql://localhost:3306/4inaRow_dev
+
+development.test.driver=com.mysql.jdbc.Driver
+development.test.username=<user>
+development.test.password=<password>
+development.test.url=jdbc:mysql://localhost:3306/4inaRow_test
+
+test.driver=com.mysql.jdbc.Driver
+test.username=<user>
+test.password=<password>
+test.url=jdbc:mysql://localhost:3306/4inaRow_test
