@@ -1,14 +1,18 @@
 package project.logic;
 
 public class Piece {
-    enum Colour {
-        WHITE,BLACK
-    }
-
     private  Colour colour;
-    public void Piece(Colour colour) {
+
+    public Piece(Colour colour) {
         this.colour = colour;
     }
+
+
+    enum Colour {
+        WHITE,BLACK,EMPTY
+    }
+
+
     public Colour getColour() {
         return colour;
     }
