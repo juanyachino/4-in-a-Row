@@ -39,17 +39,11 @@ public class Board {
      * @return true or false depending if there was a 4 in a row formation or not.
      */
     public boolean isAVictory(int column,int position){
-        Piece newPiece = getColumn(column).get(position);
-        Piece.Colour colour = newPiece.getColour();
-        //TODO
-        //1. checkHorizontalWin O-O-O-O
+        //Piece newPiece = getColumn(column).get(position);
+        //Piece.Colour colour = newPiece.getColour();
         if (checkHorizontalWIn(column,position)) return true;
-        //2. checkVerticalWin O
-        //                    O
-        //                    O
-        //                    O
         if (checkVerticalWin(column,position)) return true;
-        //3. checkDiagonalWin  4 diag
+        //TODO
         if (checkDiagonalWIn(column,position)) return true;
         return false;
     }
@@ -61,17 +55,16 @@ public class Board {
      * @return true or false depending if there is a horizontal 4 in a row formation or not
      */
     private boolean checkHorizontalWIn(int column,int position){
-        ArrayList<Piece> row = new ArrayList<>();
+        ArrayList<Piece> thisRow = new ArrayList<>();
         for (int i = 0; i < board.size(); i++){
             if (getColumn(i).size() > position) {
-                row.add(getColumn(i).get(position));
+                thisRow.add(getColumn(i).get(position));
             } else {
-                row.add(new Piece(Piece.Colour.EMPTY));
+                thisRow.add(new Piece(Piece.Colour.EMPTY));
             }
         }
-        // column.size() > position
-
-        return false;
+        Piece.Colour pieceColour = thisRow.get(column).getColour();
+        return checkRow(thisRow,pieceColour);
     }
     /**
      * checks if the given piece in the given column is part of a vertical 4 in a row formation
@@ -85,21 +78,57 @@ public class Board {
         int piecesInARow = 1;
         Piece.Colour colour = thisColumn.get(position).getColour();
         for (int i = position - 1; i>= 0; i--) {
-            if (thisColumn.get(i).getColour() == colour) piecesInARow++;
+            if (thisColumn.get(i).getColour() == colour){
+                piecesInARow++;
+            } else {
+                piecesInARow = 0;
+            }
             if (piecesInARow == 4) return true;
         }
         return false;
     }
     /**
-     * checks if the given piece in the given column is part of a horizontal 4 in a row formation
+     * checks if the given piece in the given column is part of a diagonal 4 in a row formation
      * @param column the column number
      * @param position the given position
      * @return true or false depending if there is a diagonal 4 in a row formation or not
      */
     private boolean checkDiagonalWIn(int column,int position){
-        return false;
+        //TODO
+        ArrayList<Piece> diagonalRow = new ArrayList<>();
+        int horizontalIndex  = 0;
+        int verticalIndex = column;
+        for (; verticalIndex < board.size() && verticalIndex >= 0 && horizontalIndex <= position; ){
+            if (getColumn(verticalIndex).size() > position - horizontalIndex) {
+                diagonalRow.add(getColumn(verticalIndex).get(position));
+            } else {
+                diagonalRow.add(new Piece(Piece.Colour.EMPTY));
+            }
+            verticalIndex--;
+            horizontalIndex++;
+        }
+        Piece.Colour pieceColour = getColumn(column).get(position).getColour();
+        return checkRow(diagonalRow,pieceColour);
     }
 
+    /**
+     * checks if the given row has 4 consecutive pieces of the same colour.
+     * @param thisRow the given row
+     * @param pieceColour the given piece colour
+     * @return true or false depending if there is a row of consecutive pieces of the same colour or not.
+     */
+    private boolean checkRow(ArrayList<Piece> thisRow, Piece.Colour pieceColour) {
+        int piecesInARow= 0;
+        for (Piece p : thisRow) {
+            if (p.getColour() == pieceColour){
+                piecesInARow++;
+            } else {
+                piecesInARow = 0;
+            }
+            if (piecesInARow == 4) return true;
+        }
+        return false;
+    }
     /**
      * given a column number, returns the column.
      * @param column the given column number
