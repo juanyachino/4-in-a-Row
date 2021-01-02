@@ -3,14 +3,7 @@ package project.logic;
 import java.util.ArrayList;
 
 public class Board {
-    /*private static ArrayList<Piece> firstColumn = new ArrayList<>();
-    private static ArrayList<Piece> secondColumn = new ArrayList<>();
-    private static ArrayList<Piece> thirdColumn = new ArrayList<>();
-    private static ArrayList<Piece> fourthColumn = new ArrayList<>();
-    private static ArrayList<Piece> fifthColumn = new ArrayList<>();
-    private static ArrayList<Piece> sixthColumn = new ArrayList<>();
-    private static ArrayList<Piece> seventhColumn = new ArrayList<>();
-    */
+
     private static ArrayList<ArrayList<Piece>> board = new ArrayList<>();
     /**
      * checks if a piece can be inserted on a column
@@ -39,8 +32,6 @@ public class Board {
      * @return true or false depending if there was a 4 in a row formation or not.
      */
     public boolean isAVictory(int column,int position){
-        //Piece newPiece = getColumn(column).get(position);
-        //Piece.Colour colour = newPiece.getColour();
         if (checkHorizontalWIn(column,position)) return true;
         if (checkVerticalWin(column,position)) return true;
         //TODO
