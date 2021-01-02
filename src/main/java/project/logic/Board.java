@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Board {
 
-    private static ArrayList<ArrayList<Piece>> board = new ArrayList<>();
+    private static final ArrayList<ArrayList<Piece>> board = new ArrayList<>();
     /**
      * checks if a piece can be inserted on a column
      * @param column the column number
@@ -21,7 +21,9 @@ public class Board {
      * @return the position where the piece was inserted.
      */
     public static int insertInto(int column, Piece piece) {
-        getColumn(column).add(piece);
+        ArrayList<Piece> theColumn = getColumn(column);
+        theColumn.add(piece);
+        setColumn(column,theColumn);
         return getColumn(column).size() - 1;
     }
 
@@ -127,5 +129,8 @@ public class Board {
      */
     private static ArrayList<Piece> getColumn(int column){
         return board.get(column);
+    }
+    private static void setColumn(int columnNumber,ArrayList<Piece> column) {
+        board.set(columnNumber,column);
     }
 }
