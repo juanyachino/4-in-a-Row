@@ -37,7 +37,7 @@ public class Game {
         }
         // call board's method insert
         if(!board.canInsertInto(column)){
-            throw new Exception("the column full!");
+            throw new Exception("the column is full!");
         }
         Piece thePiece = new Piece(player.getColour());
         return board.insertInto(column,thePiece);
