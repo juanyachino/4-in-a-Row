@@ -25,7 +25,21 @@ public class User extends Model{
     private String password;
     private String email;
     private String displayName;
+    private int games_played;
+    private int games_won;
+    private int games_lost;
 
+    public int getGamesPlayed() {
+        return games_played;
+    }
+
+    public int getGamesWon() {
+        return games_won;
+    }
+
+    public int getGamesLost() {
+        return games_lost;
+    }
     public String getDisplayName() {
         return displayName;
     }
