@@ -11,6 +11,9 @@ package project.models;
 // | password    | varchar     | NO   |     |                |
 // | email       | varchar     | NO   |     |                |
 // | display_name| varchar     | NO   |     |                |
+// | games_played| int         | NO   |     |                |
+// | games_won   | int         | NO   |     |                |
+// | games_lost  | int         | NO   |     |                |
 // +------------+-------------+------+-----+-----------------+
 //
 //
