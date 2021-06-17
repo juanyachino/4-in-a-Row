@@ -47,6 +47,12 @@
             <scope>system</scope>
             <systemPath>${basedir}/lib/spark-swagger-2.0.3-SNAPSHOT-jar-with-dependencies.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
