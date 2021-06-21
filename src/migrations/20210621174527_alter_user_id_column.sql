@@ -1,0 +1,5 @@
+ALTER TABLE users
+    DROP COLUMN user_id,
+    DROP COLUMN email,
+    ADD COLUMN id int(50) NOT NULL AUTO_INCREMENT,
+    ADD PRIMARY KEY (id);

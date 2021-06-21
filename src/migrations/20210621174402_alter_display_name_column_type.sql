@@ -1,0 +1,2 @@
+ALTER TABLE users
+    MODIFY display_name VARCHAR(50) NOT NULL;
