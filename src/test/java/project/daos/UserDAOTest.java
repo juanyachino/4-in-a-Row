@@ -2,24 +2,28 @@ package project.daos;
 
 
 import org.javalite.activejdbc.Base;
+import org.javalite.activejdbc.*;
 import org.javalite.activejdbc.LazyList;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import project.DAO.UserDAO;
 import project.models.User;
 
-import static org.junit.Assert.assertEquals;
+
 
 
 public class UserDAOTest {
-    @Before
-    public void before() {
+    //DB database = new DB("4inaRow_test");
+    @BeforeAll
+    public static void before() {
         Base.open();
         Base.openTransaction();
     }
-    @After
-    public void after() {
+    @AfterAll
+    public static void after() {
         Base.rollbackTransaction();
         Base.close();
     }
@@ -29,6 +33,6 @@ public class UserDAOTest {
         User user = UserDAO.createUser("Juan","1234",
                 "juan@mail.com","asdasda");
 
-        assertEquals("Count of users increased by 1", (long) preCount + 1, (long) User.count());
+        assertEquals(User.count(),preCount+1);
     }
 }
