@@ -35,4 +35,12 @@ public class UserDAOTest {
 
         assertEquals(User.count(),preCount+1);
     }
+    @Test
+    public void changeDisplayNameWorks(){
+
+        User user = UserDAO.createUser("Juan2","1234",
+                "juan2@mail.com","oldName");
+        UserDAO.modifyDisplayName("Juan2","newName");
+        assertEquals("newName",UserDAO.findByName("Juan2").getDisplayName());
+    }
 }
