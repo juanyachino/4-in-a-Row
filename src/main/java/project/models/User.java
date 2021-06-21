@@ -21,35 +21,38 @@ import org.javalite.activejdbc.Model;
 
 public class User extends Model{
 
-    private String username;
-    private String password;
-    private String email;
-    private String displayName;
-    private int games_played;
-    private int games_won;
-    private int games_lost;
-
+    /**
+     * wrapper getters and setters:
+     * these are not provided by ActiveJDBC,
+     * This will provide a safety net to those wishing some compiler static checking.
+     * Otherwise , you can just use ActiveJDBC dynamic getters and setters:
+     * i.e : User.get("username")
+     * more info here https://javalite.io/setters_and_getters
+     *
+     * This applies to every method on this class.
+     */
     public int getGamesPlayed() {
-        return games_played;
+        return getInteger("games_played");
     }
 
     public int getGamesWon() {
-        return games_won;
+        return getInteger("games_won");
     }
 
     public int getGamesLost() {
-        return games_lost;
+        return getInteger("games_lost");
     }
+
     public String getDisplayName() {
-        return displayName;
+        return getString("display_name");
     }
     public String getUsername() {
-        return username;
+        return getString("username");
     }
     public String getPassword() {
-        return password;
+        return getString("password");
     }
     public String getEmail() {
-        return email;
+        return getString("email");
     }
 }
