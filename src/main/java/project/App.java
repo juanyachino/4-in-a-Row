@@ -1,6 +1,6 @@
 package project;
 
-import com.coriant.sdn.ss.SparkSwagger;
+import com.beerboy.ss.SparkSwagger;
 import org.javalite.activejdbc.Base;
 import project.Endpoints.GameEndpoint;
 import project.Endpoints.UserEndpoint;
@@ -25,7 +25,7 @@ public class App {
 
     public static void main(String[] args) throws IOException {
         get("/hello", (req, res) -> "Hello World");
-        SparkSwagger.of(spark)
+        SparkSwagger.of(spark, "src/main/resources/" + SparkSwagger.CONF_FILE_NAME)
                 .before(
                         (request, response) -> {
                             Base.open();

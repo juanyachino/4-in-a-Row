@@ -26,7 +26,7 @@ public class User extends Model{
      * these are not provided by ActiveJDBC,
      * This will provide a safety net to those wishing some compiler static checking.
      * Otherwise , you can just use ActiveJDBC dynamic getters and setters:
-     * i.e : User.get("username")
+     * i.e : userInstance.get("username");
      * more info here https://javalite.io/setters_and_getters
      *
      * This applies to every method on this class.

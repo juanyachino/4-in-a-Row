@@ -3,19 +3,19 @@ package project.Endpoints;
 
 
 
-import com.coriant.sdn.ss.SparkSwagger;
-import com.coriant.sdn.ss.rest.Endpoint;
+
+import com.beerboy.ss.rest.Endpoint;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import project.logic.Game;
 import project.DAO.UserDAO;
 import project.models.User;
+import com.beerboy.ss.SparkSwagger;
 
 import java.util.Map;
 
-import static com.coriant.sdn.ss.descriptor.EndpointDescriptor.endpointPath;
-import static com.coriant.sdn.ss.descriptor.MethodDescriptor.path;
+import static com.beerboy.ss.descriptor.EndpointDescriptor.endpointPath;
+import static com.beerboy.ss.descriptor.MethodDescriptor.path;
 
 
 /**
@@ -47,7 +47,7 @@ public class UserEndpoint implements Endpoint {
     public void bind(SparkSwagger restApi) {
         restApi
                 .endpoint(
-                        endpointPath(NAME_SPACE).withDescription("All Game utilities"),
+                        endpointPath(NAME_SPACE).withDescription("All User utilities"),
                         (q, a) -> LOGGER.info("Received request for Game Rest API"))
                 .get(
                         path("/show_users")
@@ -61,7 +61,7 @@ public class UserEndpoint implements Endpoint {
                             int limit = req.queryParams("limit") != null
                                     ? Integer.parseInt(req.queryParams("limit"))
                                     : LIMIT;
-                            return ("{}");
+                            return ("a list with users ");
                         }
                 )
                 .post(
@@ -76,7 +76,8 @@ public class UserEndpoint implements Endpoint {
                                     bodyParams.get("email").toString(),
                                     bodyParams.get("displayName").toString());
 
-                            return user.toJson(true);
+                            //return user.toJson(true);
+                            return true;
                         }
                 )
                 .post(
