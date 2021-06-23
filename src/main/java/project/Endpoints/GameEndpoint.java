@@ -1,17 +1,19 @@
 package project.Endpoints;
 
-
-import com.beerboy.ss.rest.Endpoint;
+import io.github.manusant.ss.SparkSwagger;
+import io.github.manusant.ss.rest.Endpoint;
+//import com.beerboy.ss.rest.Endpoint;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.beerboy.ss.SparkSwagger;
+//import com.beerboy.ss.SparkSwagger;
 import project.logic.Game;
 
 import java.util.Map;
-
-import static com.beerboy.ss.descriptor.EndpointDescriptor.endpointPath;
-import static com.beerboy.ss.descriptor.MethodDescriptor.path;
+import static io.github.manusant.ss.descriptor.EndpointDescriptor.endpointPath;
+import static io.github.manusant.ss.descriptor.MethodDescriptor.path;
+//import static com.beerboy.ss.descriptor.EndpointDescriptor.endpointPath;
+//import static com.beerboy.ss.descriptor.MethodDescriptor.path;
 
 /**
  *

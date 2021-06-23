@@ -1,6 +1,7 @@
 package project;
 
-import com.beerboy.ss.SparkSwagger;
+//import com.beerboy.ss.SparkSwagger;
+import io.github.manusant.ss.SparkSwagger;
 import org.javalite.activejdbc.Base;
 import project.Endpoints.GameEndpoint;
 import project.Endpoints.UserEndpoint;

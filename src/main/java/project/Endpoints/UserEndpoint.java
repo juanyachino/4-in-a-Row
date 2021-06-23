@@ -3,19 +3,24 @@ package project.Endpoints;
 
 
 
-
-import com.beerboy.ss.rest.Endpoint;
+import io.github.manusant.ss.SparkSwagger;
+import io.github.manusant.ss.rest.Endpoint;
+//import com.beerboy.ss.rest.Endpoint;
+//import com.beerboy.ss.SparkSwagger;
 import com.google.gson.Gson;
+import org.javalite.activejdbc.LazyList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import project.DAO.UserDAO;
 import project.models.User;
-import com.beerboy.ss.SparkSwagger;
+
 
 import java.util.Map;
 
-import static com.beerboy.ss.descriptor.EndpointDescriptor.endpointPath;
-import static com.beerboy.ss.descriptor.MethodDescriptor.path;
+import static io.github.manusant.ss.descriptor.EndpointDescriptor.endpointPath;
+import static io.github.manusant.ss.descriptor.MethodDescriptor.path;
+//import static com.beerboy.ss.descriptor.EndpointDescriptor.endpointPath;
+//import static com.beerboy.ss.descriptor.MethodDescriptor.path;
 
 
 /**
@@ -61,7 +66,8 @@ public class UserEndpoint implements Endpoint {
                             int limit = req.queryParams("limit") != null
                                     ? Integer.parseInt(req.queryParams("limit"))
                                     : LIMIT;
-                            return ("a list with users ");
+                            LazyList<User> users = UserDAO.getAllUsers().limit(limit);
+                            return users.toJson(true);
                         }
                 )
                 .post(
@@ -88,7 +94,8 @@ public class UserEndpoint implements Endpoint {
                         (req, res) -> {
                             Map<String, Object> bodyParams = new Gson().fromJson(
                                     req.body(), Map.class);
-
+                            UserDAO.modifyDisplayName(bodyParams.get("username").toString(),
+                                    bodyParams.get("newDisplayName").toString());
 
                             return true;
                         }
