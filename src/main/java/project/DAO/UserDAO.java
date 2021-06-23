@@ -47,6 +47,20 @@ public class UserDAO {
     }
 
     /**
+     * given a username, a password, and the new password, it changes this user's password .
+     * @param userName
+     * @param oldPassword
+     * @param newPassword
+     */
+    public static void modifyPassword(String userName, String oldPassword, String newPassword) throws Exception {
+        User user = User.findFirst("username = ?", userName);
+        if (user.getPassword().equals(oldPassword)){
+            user.setPassword(newPassword);
+        } else {
+            throw new Exception("password is wrong!");
+        }
+    }
+    /**
      * returns all the registered users.
      * @return a list with the registered Users in the database.
      */
@@ -54,6 +68,20 @@ public class UserDAO {
         return User.findAll();
     }
 
+    /**
+     * given a username and a boolean indicating a victory or defeat
+     *  it increases their victory/defeat count and matches played count by 1
+     * @param userName the given username
+     */
+    public static void addAMatchPlayedCount(String userName,Boolean victory) {
+        User user = User.findFirst("username = ?", userName);
+        user.setGamesPlayed(user.getGamesPlayed() + 1);
+        if (victory){
+            user.setGamesWon(user.getGamesWon() + 1);
+        } else {
+            user.setGamesLost(user.getGamesLost() + 1);
+        }
+    }
     /**
      * given a user name, it returns the number of games played by that user.
      * @param userName the given user name

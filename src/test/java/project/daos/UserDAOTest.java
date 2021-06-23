@@ -43,4 +43,13 @@ public class UserDAOTest {
         UserDAO.modifyDisplayName("Juan2","newName");
         assertEquals("newName",UserDAO.findByName("Juan2").getDisplayName());
     }
+    @Test
+    public void getAllUsersWorks(){
+        User user = UserDAO.createUser("Juan2","1234",
+                "juan2@mail.com","oldName");
+        User user2 = UserDAO.createUser("Juan4","1234",
+                "juan4@mail.com","old1Name");
+        LazyList<User> userList =UserDAO.getAllUsers();
+        assertEquals(userList.size() , User.count());
+    }
 }
