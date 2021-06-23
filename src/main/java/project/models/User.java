@@ -55,4 +55,17 @@ public class User extends Model{
     public String getEmail() {
         return getString("email");
     }
+
+    public void setGamesPlayed(int gamesPlayed) {
+        set("games_played", gamesPlayed);
+    }
+    public void setGamesLost(int gamesPlayed) {
+        set("games_lost", gamesPlayed);
+    }
+    public void setGamesWon(int gamesPlayed) {
+        set("games_won", gamesPlayed);
+    }
+    public void setPassword(String newPassword) {
+        set("password", newPassword);
+    }
 }
