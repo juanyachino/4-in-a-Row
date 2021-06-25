@@ -47,7 +47,7 @@ public class UserDAO {
      * @param newDisplayName the new display name.
      */
     public static void modifyDisplayName(String userName,String newDisplayName) {
-        findByName(userName).set("display_name", newDisplayName).saveIt();
+        findByName(userName).setDisplayName(newDisplayName);
     }
 
     /**
@@ -85,14 +85,6 @@ public class UserDAO {
         } else {
             user.setGamesLost(user.getGamesLost() + 1);
         }
-    }
-    /**
-     * given a user name, it returns the number of games played by that user.
-     * @param userName the given user name
-     * @return the ammount of games played by this user.
-     */
-    public static int getTheirGamesPlayed(String userName) {
-        return findByName(userName).getGamesPlayed();
     }
 
     /**

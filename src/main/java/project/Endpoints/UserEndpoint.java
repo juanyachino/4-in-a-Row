@@ -15,6 +15,7 @@ import project.DAO.UserDAO;
 import project.models.User;
 
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static io.github.manusant.ss.descriptor.EndpointDescriptor.endpointPath;
@@ -108,8 +109,9 @@ public class UserEndpoint implements Endpoint {
                                 .withObject(String.class)
                                 .withDescription("user name").and(),
                         (req, res) -> {
-                            String userName = (req.queryParams("userName"));
-                            return UserDAO.findByName(userName).toJson(true);
+
+                            return User.findFirst("username = ?",(req.queryParams("userName")))
+                                    .toJson(true, "games_played", "games_lost","games_won","display_name");
                         }
                 )
                 .get(
