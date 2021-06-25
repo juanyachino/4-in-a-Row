@@ -5,6 +5,7 @@ import org.javalite.activejdbc.validation.ValidationException;
 import project.models.User;
 
 public class UserDAO {
+    static int DEFAULT_VALUE = 0;
     /**
      * Creates a user in the database
      * @param userName the user name
@@ -21,6 +22,9 @@ public class UserDAO {
             user.set("password", password);
             user.set("email", email);
             user.set("display_name", displayName);
+            user.set("games_played", DEFAULT_VALUE);
+            user.set("games_lost", DEFAULT_VALUE);
+            user.set("games_won", DEFAULT_VALUE);
             user.saveIt();
         } catch (ValidationException e) {
             throw new IllegalArgumentException(e.getMessage());
