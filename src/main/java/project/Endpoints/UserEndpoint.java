@@ -82,8 +82,8 @@ public class UserEndpoint implements Endpoint {
                                     bodyParams.get("email").toString(),
                                     bodyParams.get("displayName").toString());
 
-                            //return user.toJson(true);
-                            return true;
+                            return user.toJson(true);
+                            //return true;
                         }
                 )
                 .post(
@@ -101,6 +101,18 @@ public class UserEndpoint implements Endpoint {
                         }
                 )
                 .get(
+                        path("/profile")
+                                .withDescription("Loads all profile info of a player.")
+                                .withQueryParam()
+                                .withName("userName")
+                                .withObject(String.class)
+                                .withDescription("user name").and(),
+                        (req, res) -> {
+                            String userName = (req.queryParams("userName"));
+                            return UserDAO.findByName(userName).toJson(true);
+                        }
+                )
+                .get(
                         path("/changeName")
                                 .withDescription("name change (useless?)")
                                 .withQueryParam()
@@ -114,6 +126,7 @@ public class UserEndpoint implements Endpoint {
                                     : LIMIT;
                             return ("{}");
                         }
+
                 );
     }
 }
