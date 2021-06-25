@@ -58,14 +58,18 @@ public class User extends Model{
 
     public void setGamesPlayed(int gamesPlayed) {
         set("games_played", gamesPlayed);
+        this.save();
     }
     public void setGamesLost(int gamesPlayed) {
         set("games_lost", gamesPlayed);
+        this.save();
     }
     public void setGamesWon(int gamesPlayed) {
         set("games_won", gamesPlayed);
+        this.save();
     }
     public void setPassword(String newPassword) {
         set("password", newPassword);
+        this.save();
     }
 }
