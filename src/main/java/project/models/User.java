@@ -72,4 +72,9 @@ public class User extends Model{
         set("password", newPassword);
         this.save();
     }
+
+    public void setDisplayName(String newDisplayName) {
+        set("display_name", newDisplayName);
+        this.save();
+    }
 }
