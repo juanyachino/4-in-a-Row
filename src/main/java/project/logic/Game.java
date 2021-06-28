@@ -7,8 +7,9 @@ public class Game {
 
     private static Queue<Player> players;
     private static Board board;
-    public Game(){
+    public Game(String player1, String player2){
         board = new Board();
+        addPlayers(player1,player2);
     }
     public static void addPlayers(String displayName1, String displayName2) {
         players.add(new Player(Piece.Colour.BLACK,displayName1));
@@ -44,5 +45,13 @@ public class Game {
     }
     public static Player getActualPlayer(){
         return players.peek();
+    }
+
+    /**
+     * getter method for the board
+     * @return
+     */
+    public Board getBoard(){
+        return this.board;
     }
 }
