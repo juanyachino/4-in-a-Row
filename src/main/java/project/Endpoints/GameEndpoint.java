@@ -38,6 +38,7 @@ public class GameEndpoint implements Endpoint {
      *
      */
     static final Logger LOGGER = LoggerFactory.getLogger(GameEndpoint.class);
+    private Game actualGame;
 
     /**
      *
@@ -48,6 +49,19 @@ public class GameEndpoint implements Endpoint {
                 .endpoint(
                         endpointPath(NAME_SPACE).withDescription("All Game utilities"),
                         (q, a) -> LOGGER.info("Received request for Game Rest API"))
+                .post(
+                        path("/start_game")
+                                .withDescription("Starts the game with 2 players")
+                                .withRequestType(Game.class)
+                                .withResponseType(Game.class),
+                        (req, res) -> {
+                            Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
+                            actualGame = new Game(bodyParams.get("player1").toString(),
+                                    bodyParams.get("player2").toString());
+
+                            return true;
+                        }
+                )
                 .get(
                         path("/board")
                                 .withDescription("gets the updated game board")
@@ -60,7 +74,9 @@ public class GameEndpoint implements Endpoint {
                             int limit = req.queryParams("limit") != null
                                     ? parseInt(req.queryParams("limit"))
                                     : LIMIT;
-                            return ("{}");
+                            if (actualGame == null)  return "there is no game!";
+
+                            return (actualGame.getBoard());
                         }
                 )
                 .post(
@@ -73,20 +89,6 @@ public class GameEndpoint implements Endpoint {
                             Game.insertPiece(parseInt(bodyParams.get("column").toString()),
                                    Game.getActualPlayer());
 
-                            return true;
-                        }
-                )
-                .post(
-                        path("/start")
-                                .withDescription("starts the game with 2 players")
-                                .withRequestType(Game.class)
-                                .withResponseType(Game.class),
-                        (req, res) -> {
-                            Map<String, Object> bodyParams = new Gson().fromJson(
-                                    req.body(), Map.class);
-
-                            //Controller.getInstance().getGameLogic().getModeAttack().moveArmies(idPlayer,
-                              //      territoryAId, territoryBId, armiesCount);
                             return true;
                         }
                 );
