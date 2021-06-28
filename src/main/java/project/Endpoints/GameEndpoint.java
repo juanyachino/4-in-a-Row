@@ -7,11 +7,13 @@ import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 //import com.beerboy.ss.SparkSwagger;
+import project.DAO.UserDAO;
 import project.logic.Game;
 
 import java.util.Map;
 import static io.github.manusant.ss.descriptor.EndpointDescriptor.endpointPath;
 import static io.github.manusant.ss.descriptor.MethodDescriptor.path;
+import static java.lang.Integer.parseInt;
 //import static com.beerboy.ss.descriptor.EndpointDescriptor.endpointPath;
 //import static com.beerboy.ss.descriptor.MethodDescriptor.path;
 
@@ -56,21 +58,21 @@ public class GameEndpoint implements Endpoint {
                                 .withResponseType(Game.class),
                         (req, res) -> {
                             int limit = req.queryParams("limit") != null
-                                    ? Integer.parseInt(req.queryParams("limit"))
+                                    ? parseInt(req.queryParams("limit"))
                                     : LIMIT;
                             return ("{}");
                         }
                 )
-                .put(
-                        path("/move")
+                .post(
+                        path("/insert")
                                 .withDescription("Commits the piece insertion")
                                 .withRequestType(Game.class)
                                 .withResponseType(Game.class),
                         (req, res) -> {
                             Map<String, Object> bodyParams = new Gson().fromJson(req.body(), Map.class);
+                            Game.insertPiece(parseInt(bodyParams.get("column").toString()),
+                                   Game.getActualPlayer());
 
-                            //Controller.getInstance().getGameLogic().getModeAttack().cheaterAttack(playerId,
-                            //        territoryAId, territoryBId, dice1, dice2);
                             return true;
                         }
                 )

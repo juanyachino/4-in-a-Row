@@ -42,4 +42,7 @@ public class Game {
         Piece thePiece = new Piece(player.getColour());
         return board.insertInto(column,thePiece);
     }
+    public static Player getActualPlayer(){
+        return players.peek();
+    }
 }
