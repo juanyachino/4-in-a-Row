@@ -1,6 +1,6 @@
 development.driver=com.mysql.jdbc.Driver
 development.username=root
-development.url=jdbc:mysql://localhost:3306/4inaRow_test
+development.url=jdbc:mysql://localhost:3306/4inaRow_dev
 
 development.test.driver=com.mysql.jdbc.Driver
 development.test.username=root
