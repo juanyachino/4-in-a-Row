@@ -64,7 +64,7 @@ public class GameEndpoint implements Endpoint {
                 )
                 .get(
                         path("/board")
-                                .withDescription("gets the updated game board")
+                                .withDescription("gets the updated game board and player's turn")
                                 .withQueryParam()
                                 .withName("limit")
                                 .withObject(Integer.class)
@@ -76,7 +76,7 @@ public class GameEndpoint implements Endpoint {
                                     : LIMIT;
                             if (actualGame == null)  return "there is no game!";
 
-                            return (actualGame.getBoard());
+                            return (actualGame);
                         }
                 )
                 .post(

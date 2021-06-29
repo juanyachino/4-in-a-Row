@@ -1,6 +1,7 @@
 package project.logic;
 
 
+import java.util.LinkedList;
 import java.util.Queue;
 
 public class Game {
@@ -9,6 +10,7 @@ public class Game {
     private static Board board;
     public Game(String player1, String player2){
         board = new Board();
+        players = new LinkedList<Player>();
         addPlayers(player1,player2);
     }
     public static void addPlayers(String displayName1, String displayName2) {
@@ -54,4 +56,5 @@ public class Game {
     public Board getBoard(){
         return this.board;
     }
+
 }
