@@ -1,8 +1,8 @@
 package project.logic;
 
 import org.javalite.activejdbc.Base;
-import org.javalite.activejdbc.*;
-import org.javalite.activejdbc.LazyList;
+
+import org.json.JSONObject;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import project.DAO.UserDAO;
-import project.models.User;
+
 
 
 
@@ -39,5 +39,11 @@ public class GameTest {
         actualGame.changeTurn();
         assertEquals(actualGame.getActualPlayer().getDisplayName(),"pepeargento");
 
+    }
+    @Test
+    public void createGameJSONWorks(){
+        Game actualGame = new Game("juantateti","pepeargento");
+        JSONObject theJSON = actualGame.createGameJSON();
+        assertNotNull(theJSON);
     }
 }
