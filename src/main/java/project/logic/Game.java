@@ -55,6 +55,7 @@ public class Game {
             throw new Exception("the column is full!");
         }
         Piece thePiece = new Piece(player.getColour());
+        changeTurn();
         return board.insertInto(column,thePiece);
     }
 
