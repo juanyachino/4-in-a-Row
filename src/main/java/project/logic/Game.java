@@ -1,6 +1,8 @@
 package project.logic;
 
 
+import org.json.JSONObject;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -8,14 +10,24 @@ public class Game {
 
     private static Queue<Player> players;
     private static Board board;
+    private static Player player1;
+    private static Player player2;
     public Game(String player1, String player2){
         board = new Board();
-        players = new LinkedList<Player>();
+        players = new LinkedList<>();
         addPlayers(player1,player2);
     }
+
+    /**
+     * add the players to the game
+     * @param displayName1 the player one 's display name
+     * @param displayName2 the player tow 's display name.
+     */
     public static void addPlayers(String displayName1, String displayName2) {
-        players.add(new Player(Piece.Colour.BLACK,displayName1));
-        players.add(new Player(Piece.Colour.WHITE,displayName2));
+        player1 =new Player(Piece.Colour.BLACK,displayName1);
+        player2 =new Player(Piece.Colour.WHITE,displayName2);
+        players.add(player1);
+        players.add(player2);
     }
 
     /**
@@ -45,6 +57,11 @@ public class Game {
         Piece thePiece = new Piece(player.getColour());
         return board.insertInto(column,thePiece);
     }
+
+    /**
+     * get the actual player , aka which player's turn to play
+     * @return the actual player
+     */
     public static Player getActualPlayer(){
         return players.peek();
     }
@@ -56,5 +73,19 @@ public class Game {
     public Board getBoard(){
         return this.board;
     }
-
+    /**
+     * creates a JSON object with all the information of a game state
+     */
+    public JSONObject createGameJSON(){
+        JSONObject gameObject = new JSONObject();
+        // players info
+        JSONObject playerData = new JSONObject();
+        playerData.put("actual_player",getActualPlayer().getDisplayName());
+        playerData.put("player1",player1.getDisplayName());
+        playerData.put("player2",player2.getDisplayName());
+        gameObject.put("player_info", playerData);
+        // board info
+        gameObject.put("board_info", this.board.createBoardJSON());
+        return gameObject;
+    }
 }

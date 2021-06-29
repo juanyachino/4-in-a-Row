@@ -76,7 +76,7 @@ public class GameEndpoint implements Endpoint {
                                     : LIMIT;
                             if (actualGame == null)  return "there is no game!";
 
-                            return (actualGame);
+                            return (actualGame.createGameJSON());
                         }
                 )
                 .post(
