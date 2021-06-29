@@ -12,6 +12,8 @@ public class Game {
     private static Board board;
     private static Player player1;
     private static Player player2;
+    private static Player winner;
+    private static boolean victory = false;
     public Game(String player1, String player2){
         board = new Board();
         players = new LinkedList<>();
@@ -55,8 +57,13 @@ public class Game {
             throw new Exception("the column is full!");
         }
         Piece thePiece = new Piece(player.getColour());
+        int position = board.insertInto(column,thePiece);
+        if (board.isAVictory(column,position)){
+            victory = true;
+            winner = player;
+        }
         changeTurn();
-        return board.insertInto(column,thePiece);
+        return position;
     }
 
     /**
@@ -85,6 +92,7 @@ public class Game {
         playerData.put("player1",player1.getDisplayName());
         playerData.put("player2",player2.getDisplayName());
         gameObject.put("player_info", playerData);
+        if (victory) gameObject.put("winner!",winner);
         // board info
         gameObject.put("board_info", this.board.createBoardJSON());
         return gameObject;
