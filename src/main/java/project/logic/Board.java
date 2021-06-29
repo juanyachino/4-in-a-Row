@@ -1,17 +1,31 @@
 package project.logic;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class Board {
 
     private static final ArrayList<ArrayList<Piece>> board = new ArrayList<>();
+    private static final int MAX_COLUMNS = 6;
+    private static final int MAX_PIECES_PER_COLUMN = 7;
+
+    /**
+     * class constructor, initializes the board by creating the column's arrays
+     */
+    public Board() {
+        for (int i = 1; i <= MAX_COLUMNS; i++) {
+            board.add(new ArrayList<Piece>());
+        }
+    }
     /**
      * checks if a piece can be inserted on a column
      * @param column the column number
      * @return true or false depending if the column is full or not.
      */
     public static boolean canInsertInto(int column) {
-        return getColumn(column).size() <= 7;
+        return getColumn(column).size() <= MAX_PIECES_PER_COLUMN;
     }
 
     /**
@@ -132,5 +146,20 @@ public class Board {
     }
     private static void setColumn(int columnNumber,ArrayList<Piece> column) {
         board.set(columnNumber,column);
+    }
+    /**
+     * creates a JSON object of the board information
+     */
+    public JSONObject createBoardJSON () {
+        JSONObject boardData = new JSONObject();
+        for (int i = 1; i <= MAX_COLUMNS; i++) {
+            JSONArray columnData = new JSONArray();
+            ArrayList<Piece> column =getColumn(i);
+            for (Piece p : column) {
+                columnData.put(p.getColour().toString());
+            }
+            boardData.put("column " + i, columnData);
+        }
+        return boardData;
     }
 }
