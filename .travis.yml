@@ -11,7 +11,7 @@ before_install:
   - cp src/main/resources/database.properties.ci src/main/resources/database.properties 
   - mvn db-migrator:create
   - mvn db-migrator:migrate
-  - chmod +x ./utils/prepare-travis-db.sh ; ./utils/prepare-travis-db.sh
+  - chmod +x ./utils/travis-db-setup.sh ; ./utils/travis-db-setup.sh
 
 script:
   - mvn test
